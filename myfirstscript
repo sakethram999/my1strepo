@@ -1,0 +1,20 @@
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "krishna.cyq748jn2bv4.ap-south-1.rds.amazonaws.com",
+  user: "admin",
+  password: "adminroot",
+  database: "fruits"
+});
+
+var fruit= process.argv[2];
+console.log("input :## " + fruit);
+
+con.connect(function(err) {
+  if (err) throw err;
+      var sqlQuery="SELECT * FROM dataset WHERE fruit_name = ? ";
+      con.query(sqlQuery,[fruit], function (err, result) {
+      if (err) throw err;
+        console.log(result);
+      });
+});
